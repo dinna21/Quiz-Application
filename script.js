@@ -72,6 +72,7 @@ function showQuestion()
     }
     )
 }
+startQuiz()
 function resetState()
 {
     nextButton.style.display = "none";
@@ -98,7 +99,7 @@ function selectAnswer(e)
         if(button.dataset.correct==='true'){
             button.classList.add("correct");
         }
-        button.disabled = 'true';
+        button.disabled = true;
     })
     nextButton.style.display = "block";
 }
@@ -130,6 +131,3 @@ nextButton.addEventListener("click",()=>
         startQuiz();
     }
 })
-
-
-startQuiz();
