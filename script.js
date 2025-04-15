@@ -82,26 +82,33 @@ function resetState()
     }
 }
 
-function selectAnswer(e)
-{
+function selectAnswer(e) {
     const selectButton = e.target;
     const isCorrect = selectButton.dataset.correct === 'true';
-    if(isCorrect)
-    {
+    
+    if (isCorrect) {
         selectButton.classList.add("correct");
         scoreBoard++;
-    }
-    else{
+    } else {
         selectButton.classList.add("incorrect");
     }
-    Array.from(answerButton.children).forEach(button=>
-    {
-        if(button.dataset.correct==='true'){
+
+    Array.from(answerButton.children).forEach(button => {
+        if (button.dataset.correct === 'true') {
             button.classList.add("correct");
         }
-        button.disabled = true;
-    })
-    nextButton.style.display = "block";
+        button.disabled = true;  // Fixed: should be a boolean, not a string
+    });
+
+    // Optional: remove the need to click the "Next" button
+    // Show next question after a short delay (e.g., 1.5 seconds)
+    setTimeout(() => {
+        if (currentQuestionIndex < questions.length - 1) {
+            handleNextButton();
+        } else {
+            showScore();
+        }
+    }, 1500); // 1500 milliseconds = 1.5 seconds
 }
 
 function showScore()
